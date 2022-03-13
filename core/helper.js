@@ -142,7 +142,7 @@ exports.serialize = async function (chat) {
       ? m.message[m.type].caption
       : m.type == 'extendedTextMessage' && m.message[m.type].text
       ? m.message[m.type].text
-      : m.type == 'buttonsResponseMessage' && m.message[m.type].selectedButtonId.includes("SMH")
+      : m.type == 'buttonsResponseMessage' && m.message[m.type].selectedButtonId
       ? m.message[m.type].selectedButtonId
       : m.type == 'listResponseMessage' && m.message[m.type].singleSelectReply.selectedRowId
       ? m.message[m.type].singleSelectReply.selectedRowId

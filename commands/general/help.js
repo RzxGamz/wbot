@@ -48,7 +48,7 @@ module.exports = {
       const keys = Object.keys(categories);
       for (const key of keys) {
         str += `*${key.toUpperCase()}*\n${categories[key]
-          .map((command) => `*≻* ${prefix}${command.name}`)
+          .map((command) => `≻ ${prefix}${command.name}`)
           .join('\n')}\n\n`;
       }
       str += `send ${prefix}help followed by a command name to get detail of command, e.g. ${prefix}help sticker`;

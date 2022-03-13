@@ -57,7 +57,7 @@ module.exports = {
         { buttonId: '#stats SMH', buttonText: { displayText: 'STATUS' }, type: 1 }
       ]
       //wa.sendButtons(msg.from, str, ' ', buttons, { quoted: msg, contextInfo: { mentionedJid: [sender] }})
-      let loc = await ev.prepareMessage(msg.from, require('fs').readFileSync('././lib/img.png'), 'locationMessage', { thumbnail: require('fs').readFileSync('././lib/img.png') })
+      let loc = await ev.prepareMessage(msg.from, require('fs').readFileSync('././temp/img.png'), 'locationMessage', { thumbnail: require('fs').readFileSync('././temp/img.png') })
       ev.sendMessage(msg.from, { locationMessage: loc.message.locationMessage, contentText: str, footerText: "Whatsapp Bot", buttons: buttons, headerType: "LOCATION" }, "buttonsMessage", { quoted: msg, contextInfo: { mentionedJid: [sender] }})
     }
   },

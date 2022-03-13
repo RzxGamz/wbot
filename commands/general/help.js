@@ -44,21 +44,23 @@ module.exports = {
           categories[info.category].push(info);
         }
       }
+      let P = 1
       let str = `Hello, @${sender.split("@")[0]}\n${ucapan}\n\n`;
       const keys = Object.keys(categories);
       for (const key of keys) {
         str += `*${key.toUpperCase()}*\n${categories[key]
-          .map((command) => `• ${prefix}${command.name}`)
+          .map((command) => `*${P++}.*  ${prefix}${command.name}`)
           .join('\n')}\n\n`;
       }
       str += `send ${prefix}help followed by a command name to get detail of command, e.g. ${prefix}help sticker`;
       let buttons = [
-        { buttonId: '#owner SMH', buttonText: { displayText: 'OWNER' }, type: 1 },
-        { buttonId: '#stats SMH', buttonText: { displayText: 'STATUS' }, type: 1 }
+        { buttonId: '#owner', buttonText: { displayText: 'OWNER' }, type: 1 },
+        { buttonId: '#stats', buttonText: { displayText: 'STATUS' }, type: 1 }
       ]
       //wa.sendButtons(msg.from, str, ' ', buttons, { quoted: msg, contextInfo: { mentionedJid: [sender] }})
-      let loc = await ev.prepareMessage(msg.from, require('fs').readFileSync('././temp/img.png'), 'locationMessage', { thumbnail: require('fs').readFileSync('././temp/img.png') })
-      ev.sendMessage(msg.from, { locationMessage: loc.message.locationMessage, contentText: str, footerText: "Whatsapp Bot", buttons: buttons, headerType: "LOCATION" }, "buttonsMessage", { quoted: msg, contextInfo: { mentionedJid: [sender] }})
+      //let loc = await ev.prepareMessage(msg.from, require('fs').readFileSync('././temp/img.png'), 'locationMessage', { thumbnail: require('fs').readFileSync('././temp/img.png') })
+      let doc = { "url": "https://mmg.whatsapp.net/d/f/Ano5cGYOFQnC51uJaqGBWiCrSJH1aDCi8-YPQMMb1N1y.enc", "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "title": "@Rzxbot", "fileSha256": "8Xfe3NQDhjwVjR54tkkShLDGrIFKR9QT5EsthPyxDCI=", "fileLength": 50000000000, "pageCount": 404, "mediaKey": "XWv4hcnpGY51qEVSO9+e+q6LYqPR3DbtT4iqS9yKhkI=", "fileName": "ʀᴢx ʙᴏᴛ ᴡʜᴀᴛsᴀᴘᴘ", "fileEncSha256": "NI9ykWUcXKquea4BmH7GgzhMb3pAeqqwE+MTFbH/Wk8=", "directPath": "/v/t62.7119-24/35160407_568282564396101_3119299043264875885_n.enc?ccb=11-4&oh=d43befa9a76b69d757877c3d430a0752&oe=61915CEC", "mediaKeyTimestamp": "1634472176", "jpegThumbnail": require('fs').readFileSync('././temp/img.png') }
+      ev.sendMessage(msg.from, { documentMessage: doc, contentText: str, footerText: "Whatsapp Bot", buttons: buttons, headerType: "DOCUMENT" }, "buttonsMessage", { quoted: msg, contextInfo: { mentionedJid: [sender] }})
     }
   },
 };

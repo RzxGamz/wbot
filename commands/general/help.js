@@ -2,6 +2,8 @@ const djs = require('@discordjs/collection');
 const con = require('../../core/connect');
 const crypto = require('crypto')
 const ev = con.Whatsapp;
+const moment = require('moment-timezone');
+const ucapan = "Selamat "+ moment(Date.now()).tz('Asia/Jakarta').locale('id').format('a')
 
 module.exports = {
   name: 'help',
@@ -42,20 +44,21 @@ module.exports = {
           categories[info.category].push(info);
         }
       }
-      let str = '\t'.repeat(16) + "\`\`\`PUBLIC BOT\`\`\`\n\n"
-      +`Hello, @${sender.split("@")[0]}\n*Here My Command List*\n\n`;
+      let str = `Hello, @${sender.split("@")[0]}\n${ucapan}\n\n`;
       const keys = Object.keys(categories);
       for (const key of keys) {
         str += `*${key.toUpperCase()}*\n${categories[key]
-          .map((command) => `${prefix}${command.name}`)
-          .join(', ')}\n\n`;
+          .map((command) => `• ${prefix}${command.name}`)
+          .join('\n')}\n\n`;
       }
       str += `send ${prefix}help followed by a command name to get detail of command, e.g. ${prefix}help sticker`;
       let buttons = [
         { buttonId: '#owner SMH', buttonText: { displayText: 'OWNER' }, type: 1 },
         { buttonId: '#stats SMH', buttonText: { displayText: 'STATUS' }, type: 1 }
       ]
-      wa.sendButtons(msg.from, str, ' ', buttons, { quoted: msg, contextInfo: { mentionedJid: [sender] }})
+      //wa.sendButtons(msg.from, str, ' ', buttons, { quoted: msg, contextInfo: { mentionedJid: [sender] }})
+      let loc = await ev.prepareMessage(msg.from, require('fs').readFileSync('././lib/img.png'), 'locationMessage', { thumbnail: require('fs').readFileSync('././lib/img.png') })
+      ev.sendMessage(msg.from, { locationMessage: loc.message.locationMessage, contentText: str, footerText: "Whatsapp Bot", buttons: buttons, headerType: "LOCATION" }, "buttonsMessage", { quoted: msg, contextInfo: { mentionedJid: [sender] }})
     }
   },
 };

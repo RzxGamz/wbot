@@ -28,11 +28,12 @@ function readCmd() {
 		for (const file of commandFiles) {
 			const command = require(`./commands/${res}/${file}`);
 			djs.commands.set(command.name, command);
+                        console.log(color(`${command}.js`));
 		}
 	});
 	console.log(color('[SYS]', 'yellow'), 'command loaded!');
 }
-readCmd();
+readCmd()
 
 con.connect();
 process.on('uncaughtException', console.error);
@@ -132,13 +133,13 @@ ev.on('chat-update', async (msg) => {
 
 		if (!command) return;
 
-		/*if (!cooldown.has(from)) {
+		if (!cooldown.has(from)) {
 			cooldown.set(from, new djs.Collection());
 		}
 
 		const now = Date.now();
 		const timestamps = cooldown.get(from);
-		const cooldownAmount = (command.cooldown || 2) * 1000;
+		const cooldownAmount = (command.cooldown || 2) * 3000;
 
 		if (timestamps.has(from)) {
 			const expirationTime = timestamps.get(from) + cooldownAmount;
@@ -158,7 +159,7 @@ ev.on('chat-update', async (msg) => {
 		}
 
 		timestamps.set(from, now);
-		setTimeout(() => timestamps.delete(from), cooldownAmount);*/
+		setTimeout(() => timestamps.delete(from), cooldownAmount);
 
 		try {
 			command.execute(msg, wa, args, arg);

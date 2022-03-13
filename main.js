@@ -13,7 +13,7 @@ const djs = require('@discordjs/collection');
 const joinHandler = require("./group_event");
 const { owner } = require('./config.json')
 const ev = con.Whatsapp;
-const prefix = '!';
+const prefix = '#';
 const multi_pref = new RegExp('^[' + '!#$%&?/;:,.<>~-+='.replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']');
 const time = moment.tz('Asia/jakarta').format('DD/MM/YY HH:mm:ss');
 
@@ -28,7 +28,7 @@ function readCmd() {
 		for (const file of commandFiles) {
 			const command = require(`./commands/${res}/${file}`);
 			djs.commands.set(command.name, command);
-                        console.log(color(`${command}.js`));
+                        console.log(color(`${command.name}.js`));
 		}
 	});
 	console.log(color('[SYS]', 'yellow'), 'command loaded!');
@@ -139,7 +139,7 @@ ev.on('chat-update', async (msg) => {
 
 		const now = Date.now();
 		const timestamps = cooldown.get(from);
-		const cooldownAmount = (command.cooldown || 2) * 3000;
+		const cooldownAmount = (command.cooldown || 2) * 1500;
 
 		if (timestamps.has(from)) {
 			const expirationTime = timestamps.get(from) + cooldownAmount;

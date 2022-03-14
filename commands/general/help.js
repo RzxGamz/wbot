@@ -53,8 +53,8 @@ module.exports = {
       }
       str += `send ${prefix}help followed by a command name to get detail of command, e.g. ${prefix}help sticker`;
       let buttons = [
-        { buttonId: '#owner', buttonText: { displayText: 'OWNER' }, type: 1 },
-        { buttonId: '#stats', buttonText: { displayText: 'STATUS' }, type: 1 }
+        { buttonId: '/owner', buttonText: { displayText: 'OWNER' }, type: 1 },
+        { buttonId: '/stats', buttonText: { displayText: 'STATUS' }, type: 1 }
       ]
       //wa.sendButtons(msg.from, str, ' ', buttons, { quoted: msg, contextInfo: { mentionedJid: [sender] }})
       //let loc = await ev.prepareMessage(msg.from, require('fs').readFileSync('././temp/img.png'), 'locationMessage', { thumbnail: require('fs').readFileSync('././temp/img.png') })

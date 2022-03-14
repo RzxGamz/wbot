@@ -68,6 +68,7 @@ ev.on('chat-update', async (msg) => {
 		msg = await wa.serialize(msg);
 		if (!msg.message) return;
 		if (msg.key && (msg.key.remoteJid === 'status@broadcast' || msg.key.id.startsWith('3EB0') && msg.key.id.length === 12)) return;
+                msg.message = (Object.keys(msg.message)[0] === 'ephemeralMessage') ? msg.message.ephemeralMessage.message : msg.message
 		// if (!msg.key.fromMe) return;
 		let { type, isGroup, sender, from, body } = msg;
 		switch (type) {
@@ -148,12 +149,12 @@ ev.on('chat-update', async (msg) => {
 				if (isGroup) {
 					let timeLeft = (expirationTime - now) / 1000;
 					console.log(color(`[${time}]`, 'yellow'), color('[SPAM]', 'red'), color(`${sender.split('@')[0]}`, 'lime'), 'in', color(groupSubject, 'lime'));
-					return wa.reply(from, `This group is on cooldown, please wait another _${timeLeft.toFixed(1)} second(s)_`, msg)
+					return wa.reply(from, `*Jangan Spam !!! Mohon tunggu setelah ${timeLeft.toFixed(1)} detik*`, msg)
 				}
 				if (!isGroup) {
 					let timeLeft = (expirationTime - now) / 1000;
 					console.log(color(`[${time}]`, 'yellow'), color('[SPAM]', 'red'), color(`${sender.split('@')[0]}`, 'lime'));
-					return wa.reply(from, `You are on cooldown, please wait another _${timeLeft.toFixed(1)} second(s)_`, msg)
+					return wa.reply(from, `*Jangan Spam !!! Mohon tunggu setelah ${timeLeft.toFixed(1)} detik*`, msg)
 				}
 			}
 		}

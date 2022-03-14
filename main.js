@@ -89,7 +89,7 @@ ev.on('chat-update', async (msg) => {
 		if (type === 'buttonsResponseMessage' && !body.startsWith(temp_pref)) {
 			buttonsParser(msg);
 		} else if (type === 'buttonsResponseMessage' && body.startsWith(temp_pref)) {
-			msg.message = { conversation: msg.message.buttonsResponseMessage.selectedDisplayText };
+			msg.message = { conversation: msg.message.buttonsResponseMessage.selectedButtonId };
 		}
 		body = type === 'conversation' && body.startsWith(temp_pref) ? body : (type === 'imageMessage' || type === 'videoMessage') && body && body.startsWith(temp_pref) ? body : type === 'ephemeralMessage' && body.startsWith(temp_pref) ? body : type === 'extendedTextMessage' && body.startsWith(temp_pref) ? body : type === 'buttonsResponseMessage' && body.startsWith(temp_pref) ? body : type === 'listResponseMessage' && body.startsWith(temp_pref) ? body : '';
 		const arg = body.substring(body.indexOf(' ') + 1);

@@ -78,7 +78,7 @@ year: 'numeric'
 })
 //ev.copyNForward(m.key.remoteJid, m.message)
 //ev.sendMessage(m.key.remoteJid, `ANTI DELETE\n\n▢ Nama : @${m.participant.split("@")[0]}\n▢ Tipe : ${c3type}\n▢ Tanggal : ${jam} - ${week} ${weton} - ${calender}`, MessageType.text, {quoted: m.message, contextInfo: {"mentionedJid": [m.participant]}})
-if (m.key.remoteJid == 'status@broadcast') {
+if (!m.key.remoteJid == 'status@broadcast') {
 ev.sendMessage(m.key.remoteJid, { contentText: `Hai @${m.participant.split("@")[0]}\nSelamat ${salam}\n\nAda yang bisa saya bantu?\nSilahkan ketik #menu untuk menampilkan menu`, footerText: "Shell Bot", buttons: [{buttonId: "/menu", buttonText: { displayText: "MENU" }, type: 1}], headerType: "EMPTY" }, "buttonsMessage", { quoted: m.message, contextInfo: { mentionedJid: [m.participant] }})
 }
 }

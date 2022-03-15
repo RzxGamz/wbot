@@ -1,4 +1,5 @@
 const ev = require("../../core/connect").Whatsapp;
+const { owner } = require("../../config.json");
 
 module.exports = {
     name: "join",
@@ -6,6 +7,7 @@ module.exports = {
     desc: "Join to group using invite url.",
     async execute(msg, wa, args) {
         // search for invite url
+        if (!owner.includes(sender)) return;
         const rex1 = /chat.whatsapp.com\/([\w\d]*)/g;
         let code = args.join(" ").match(rex1);
         if (code === null) return wa.reply(msg.from, "No invite url detected.", msg);

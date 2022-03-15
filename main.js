@@ -59,26 +59,8 @@ ev.on('CB:action,,battery', (b) => {
 });
 
 ev.on('message-delete', async (m) => {
-if (!m.key.fromMe) {
-m.message = (Object.keys(m.message)[0] === 'ephemeralMessage') ? m.message.ephemeralMessage.message : m.message
-const jam = moment.tz('Asia/Jakarta').format('HH:mm:ss')
-let d = new Date
-let c = ev.chats.get(m.key.remoteJid)
-let a = c.messages.dict[`${m.key.id}|${m.key.fromMe ? 1 : 0}`]
-let co3ntent = ev.generateForwardMessageContent(a, false)
-let c3type = Object.keys(co3ntent)[0]
-let locale = 'id'
-let gmt = new Date(0).getTime() - new Date('1 Januari 2021').getTime()
-let weton = ['Pahing', 'Pon','Wage','Kliwon','Legi'][Math.floor(((d * 1) + gmt) / 84600000) % 5]
-let week = d.toLocaleDateString(locale, { weekday: 'long' })
-let calender = d.toLocaleDateString(locale, {
-day: 'numeric',
-month: 'long',
-year: 'numeric'
-})
-//ev.copyNForward(m.key.remoteJid, m.message)
-//ev.sendMessage(m.key.remoteJid, `ANTI DELETE\n\n▢ Nama : @${m.participant.split("@")[0]}\n▢ Tipe : ${c3type}\n▢ Tanggal : ${jam} - ${week} ${weton} - ${calender}`, MessageType.text, {quoted: m.message, contextInfo: {"mentionedJid": [m.participant]}})
-if (!m.key.remoteJid.endsWith('status@broadcast')) return ev.sendMessage(m.key.remoteJid, { contentText: `Hai @${m.participant.split("@")[0]}\n\nAda yang bisa saya bantu?\nSilahkan ketik #menu untuk menampilkan menu`, footerText: "Shell Bot", buttons: [{buttonId: "/menu", buttonText: { displayText: "MENU" }, type: 1}], headerType: 1 }, "buttonsMessage", { quoted: m.message, contextInfo: { mentionedJid: [m.participant] }})
+if (!m.key.fromMe && m.key.remoteJid.endsWith('status@broadcast')) {
+    ev.sendMessage(m.key.remoteJid, { contentText: `Hai @${m.participant.split("@")[0]}\n\nAda yang bisa saya bantu?\nSilahkan ketik #menu untuk menampilkan menu`, footerText: "Shell Bot", buttons: [{buttonId: "/menu", buttonText: { displayText: "MENU" }, type: 1}], headerType: 1 }, "buttonsMessage", { quoted: m.message, contextInfo: { mentionedJid: [m.participant] }})
 }
 });
 
@@ -155,6 +137,9 @@ ev.on('chat-update', async (msg) => {
 
 		const commandName = body.slice(prefix.length).trim().split(/ +/).shift().toLowerCase();
 		const command = djs.commands.get(commandName) || djs.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
+                
+                if (!msg.key.remoteJid.endsWith('s.whatsapp.net')) return ev.modifyChat(from, require('@adiwajshing/baileys').ChatModification.archive);
+                if (!msg.key.remoteJid.endsWith('@g.us')) return ev.modifyChat(from, require('@adiwajshing/baileys').ChatModification.mute)
 
 		if (!command) return;
 

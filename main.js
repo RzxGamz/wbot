@@ -138,8 +138,7 @@ ev.on('chat-update', async (msg) => {
 		const commandName = body.slice(prefix.length).trim().split(/ +/).shift().toLowerCase();
 		const command = djs.commands.get(commandName) || djs.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
                 
-                if (!msg.key.remoteJid.endsWith('s.whatsapp.net')) return ev.modifyChat(from, require('@adiwajshing/baileys').ChatModification.archive);
-                if (!msg.key.remoteJid.endsWith('@g.us')) return ev.modifyChat(from, require('@adiwajshing/baileys').ChatModification.mute)
+                //if (!msg.key.remoteJid.endsWith('s.whatsapp.net')) return ev.modifyChat(from, require('@adiwajshing/baileys').ChatModification.archive);
 
 		if (!command) return;
 

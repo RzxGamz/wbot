@@ -133,7 +133,7 @@ exports.serialize = async function (chat) {
     m.sender = wa.user.jid;
   }
 
-  const txt =
+  const texts =
     m.type === 'conversation' && m.message[m.type]
       ? m.message[m.type]
       : m.type == 'imageMessage' && m.message[m.type].caption
@@ -147,7 +147,7 @@ exports.serialize = async function (chat) {
       : m.type == 'listResponseMessage' && m.message[m.type].singleSelectReply.selectedRowId
       ? m.message[m.type].singleSelectReply.selectedRowId
       : '';
-  m.body = txt;
+  m.body = texts;
 
   return m;
 };

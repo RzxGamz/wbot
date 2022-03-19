@@ -26,19 +26,19 @@ module.exports = {
             }
 
             if (!isGroup) return wa.sendText(from, `Only can be executed in group.`)
-            if (!cekAdmin(sender)) return wa.reply(from, `IND:\n${lang.indo.group.promote.noPerms}\n\nEN:\n${lang.eng.group.promote.noPerms}`, msg)
-            if (!cekAdmin(ev.user.jid)) return wa.reply(from, `IND:\n${lang.indo.group.promote.botNoPerms}\n\nEN:\n${lang.eng.group.promote.botNoPerms}`, msg)
+            if (!cekAdmin(sender)) return wa.reply(from, `Can only be used by group admins`, msg)
+            if (!cekAdmin(ev.user.jid)) return wa.reply(from, `Bot not admin!`, msg)
 
             if (quoted) {
                 const mention = quoted.participant
                 if (!checkInGroup(mention)) return wa.reply(from, "Member no longer in group", msg)
-                if (cekAdmin(mention)) return wa.reply(from, `IND:\n${lang.indo.group.promote.fail}\n\nEN:\n${lang.eng.group.promote.fail}`, msg)
+                if (cekAdmin(mention)) return wa.reply(from, `Maaf tidak bisa kick admin grup`, msg)
                 await ev.groupRemove(from, [mention])
                 wa.reply(from, `Sukses kick member`, msg)
             } else if (mentionedJid) {
                 const mention = mentionedJid[0]
                 if (!checkInGroup(mention)) return wa.reply(from, "Member no longer in group", msg)
-                if (cekAdmin(mention)) return wa.reply(from, `IND:\n${lang.indo.group.promote.fail}\n\nEN:\n${lang.eng.group.promote.fail}`, msg)
+                if (cekAdmin(mention)) return wa.reply(from, `Maaf tidak bisa kick admin grup`, msg)
                 await ev.groupRemove(from, [mention])
                 wa.reply(from, `Sukses kick member`, msg)
             } else {

@@ -72,7 +72,7 @@ module.exports = {
           categories[info.category].push(info);
         }
       }
-      let str = `Hello, @${sender.split("@")[0]}\n${ucapan}\n\n*Time :* ${time}\n*Date :* ${week} ${weton}, ${date}\n*Date Islam :* ${dateIslam}\n\n*Ramadhan 1443 H*\n${hitungRamadhan}\n\n_Here are all the commands from my bot_\n${readmore}\n`;
+      let str = `Hello, @${sender.split("@")[0]}\n${ucapan}\n\n*Time :* ${time} WIB\n*Date :* ${week} ${weton}, ${date}\n*Date Islam :* ${dateIslam}\n\n*Ramadhan 1443 H*\n${hitungRamadhan}\n\n_Here are all the commands from my bot_\n${readmore}\n`;
       const keys = Object.keys(categories);
       for (const key of keys) {
         str += `*${key.toUpperCase()}*\n${categories[key]

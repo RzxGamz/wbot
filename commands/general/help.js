@@ -3,7 +3,35 @@ const con = require('../../core/connect');
 const crypto = require('crypto')
 const ev = con.Whatsapp;
 const moment = require('moment-timezone');
+const time = moment.tz('Asia/Jakarta').format('HH:mm:ss')
 const ucapan = "Selamat "+ moment(Date.now()).tz('Asia/Jakarta').locale('id').format('a')
+
+var countDownDate = new Date("April, 02, 2022 04:15:00").getTime();
+var now = new Date(new Date().getTime() + 25200000).getTime();
+var distance = countDownDate - now;
+var hD = Math.floor(distance / (1000 * 60 * 60 * 24));
+var hH = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var hM = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+var hS = Math.floor((distance % (1000 * 60)) / 1000);
+var hitungRamadhan = `${hD} Hari ${hH} Jam ${hM} Menit ${hS} Detik`
+        
+let d = new Date(new Date + 3600000)
+let locale = 'id'
+let weton = ['Pahing', 'Pon', 'Wage', 'Kliwon', 'Legi'][Math.floor(d / 84600000) % 5]
+let week = d.toLocaleDateString(locale, { weekday: 'long' })
+let date = d.toLocaleDateString(locale, {
+       day: 'numeric',
+       month: 'long',
+       year: 'numeric'
+})
+let dateIslam = Intl.DateTimeFormat(locale + '-TN-u-ca-islamic', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+}).format(d)
+
+const more = String.fromCharCode(8206)
+const readmore = more.repeat(4001)
 
 module.exports = {
   name: 'help',
@@ -44,7 +72,7 @@ module.exports = {
           categories[info.category].push(info);
         }
       }
-      let str = `Hello, @${sender.split("@")[0]}\n${ucapan}\n\n`;
+      let str = `Hello, @${sender.split("@")[0]}\n${ucapan}\n\n*Time :* ${time}\n*Date :* ${week} ${weton}, ${date}\n*Date Islam :* ${dateIslam}\n\n*Ramadhan 1443 H*\n${hitungRamadhan}\n\n_Here are all the commands from my bot_\n${readmore}\n`;
       const keys = Object.keys(categories);
       for (const key of keys) {
         str += `*${key.toUpperCase()}*\n${categories[key]

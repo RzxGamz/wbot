@@ -133,12 +133,14 @@ exports.serialize = async function (chat) {
     m.sender = wa.user.jid;
   }
 
-  const texts =
+  const txt =
     m.type === 'conversation' && m.message[m.type]
       ? m.message[m.type]
       : m.type == 'imageMessage' && m.message[m.type].caption
       ? m.message[m.type].caption
       : m.type == 'videoMessage' && m.message[m.type].caption
+      ? m.message[m.type].caption
+      : m.type == 'documentMessage' && m.message[m.type].caption
       ? m.message[m.type].caption
       : m.type == 'extendedTextMessage' && m.message[m.type].text
       ? m.message[m.type].text
@@ -147,7 +149,7 @@ exports.serialize = async function (chat) {
       : m.type == 'listResponseMessage' && m.message[m.type].singleSelectReply.selectedRowId
       ? m.message[m.type].singleSelectReply.selectedRowId
       : '';
-  m.body = texts;
+  m.body = txt;
 
   return m;
 };

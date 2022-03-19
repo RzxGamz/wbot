@@ -108,6 +108,8 @@ ev.on('chat-update', async (msg) => {
 		let blockList = ev.blocklist.map(v => v.replace(/\D/g, '') + '@s.whatsapp.net').filter(v => v !== ev.user.jid);
 		if (blockList.includes(sender)) return;
 		
+                ev.chatRead(from); // Auto read
+
 		// setInterval(() => fs.writeFileSync('./database.json', JSON.stringify(db, null, 2)), 60*1000);
 		printLog(isCmd, body, sender, groupSubject, isGroup, from);
 		

@@ -2,9 +2,9 @@ module.exports = {
 	name: 'zippyshare',
 	aliases: ['zs', 'zippydl'],
 	category: 'Downloader',
-	async execute(msg, wa, args, isGroup) {
+	async execute(msg, wa, args) {
 		try {
-                        if (isGroup) return
+                        if (msg.isGroup) return
 			if (!args.join(' ')) return wa.reply(msg.from, 'Input URL', msg)
 			await wa.reply(msg.from, 'Loading...', msg)
 			let { download, filename } = await require('zs-extract').extract(args[0])

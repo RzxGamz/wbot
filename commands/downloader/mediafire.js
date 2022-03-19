@@ -10,6 +10,8 @@ module.exports = {
 		if (!args[0]) return wa.reply(from, 'Input url', msg)
 		mediafireDl(args[0]).then(async (res) => {
 			await wa.reply(from, JSON.stringify(res, null, 2), msg)
+                        let sizex = res.size.replace(" MB", "")
+                        if (sizex > 150) return wa.reply(from, "Maaf size file yang ingin di download sangat besar!", msg)
 			let mimetype = await mime.lookup(res.link)
 			await wa.custom(from, { url: res.link }, 'documentMessage', { quoted: msg, filename: res.title, mimetype })
 		}).catch(e => wa.reply(msg.from, String(e), msg))

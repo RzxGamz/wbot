@@ -1,4 +1,4 @@
-const { facebookdlv2 } = require('@bochilteam/scraper')
+const BT = require('@bochilteam/scraper')
 const lang = require('../other/text.json')
 
 const errMess = `ID:\n${lang.indo.util.download.fbFail}\n\nEN:\n${lang.eng.util.download.fbFail}`
@@ -11,12 +11,12 @@ module.exports = {
   async execute(msg, wa, args) {
     try {
       if (!args[0]) return wa.reply(msg.from, 'Input URL', msg)
-      let data = await facebookdlv2(args[0])
+      let data = await BT.facebookdlv2(args[0])
       if (data.result.length === 0) return wa.reply(msg.from, `ID:\n${lang.indo.util.download.fbPriv}\n\nEN:\n${lang.eng.util.download.fbPriv}`)
       await wa.mediaURL(msg.from, data.result[0].url, { quoted: msg })
-    } catch(e) {
+    } catch (e) {
       console.log(e)
-      //wa.reply(msg.from, errMess, msg)
+      wa.reply(msg.from, errMess, msg)
     }
   }
 }

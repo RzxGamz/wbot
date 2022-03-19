@@ -16,7 +16,7 @@ module.exports = {
       await wa.mediaURL(msg.from, data.result[0].url, { quoted: msg })
     } catch(e) {
       console.log(e)
-      wa.reply(msg.from, errMess, msg)
+      //wa.reply(msg.from, errMess, msg)
     }
   }
 }

@@ -1,5 +1,6 @@
 const { owner } = require('../../config.json');
 const sewa = require('../../lib/sewa.js');
+const fs = require('fs');
 const db_sewa = JSON.parse(fs.readFileSync('././databases/sewa.json'));
 
 module.exports = {

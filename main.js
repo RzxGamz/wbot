@@ -1,5 +1,6 @@
 const con = require('./core/connect');
 const wa = require('./core/helper');
+const sewa = require('./lib/sewa.js');
 const { color } = require('./utils');
 const { sticker } = require("./core/convert");
 const { buttonsParser } = require('./core/parser');
@@ -16,9 +17,6 @@ const ev = con.Whatsapp;
 const prefix = '#';
 const multi_pref = new RegExp('^[' + '!#$%&?/;:,.<>~-+='.replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']');
 const time = moment.tz('Asia/jakarta').format('DD/MM/YY HH:mm:ss');
-
-global.sewa = require('./lib/sewa.js');
-global.db_sewa = JSON.parse(fs.readFileSync('./databases/sewa.json'));
 
 djs.commands = new djs.Collection();
 const cooldown = new djs.Collection();
@@ -59,12 +57,6 @@ ev.on('CB:action,,battery', (b) => {
 	ev['battery']['value'] = parseInt(b[2][0][1].value)
 	ev['battery']['charge'] = b[2][0][1].live === 'false' ? false : true
 	ev['battery']['lowPower'] = b[2][0][1].powersave === 'false' ? false : true
-});
-
-ev.on('message-delete', async (m) => {
-if (!m.key.fromMe && m.key.remoteJid.endsWith('status@broadcast')) {
-    ev.sendMessage(m.key.remoteJid, { contentText: `Hai @${m.participant.split("@")[0]}\n\nAda yang bisa saya bantu?\nSilahkan ketik #menu untuk menampilkan menu`, footerText: "Shell Bot", buttons: [{buttonId: "/menu", buttonText: { displayText: "MENU" }, type: 1}], headerType: 1 }, "buttonsMessage", { quoted: m.message, contextInfo: { mentionedJid: [m.participant] }})
-}
 });
 
 ev.on("group-participants-update", async (json) => {

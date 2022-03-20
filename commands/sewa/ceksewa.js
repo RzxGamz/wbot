@@ -1,6 +1,4 @@
-const sewa = require('../../lib/sewa.js');
-const fs = require('fs');
-const db_sewa = JSON.parse(fs.readFileSync('././databases/sewa.json'));
+const { sewa, db_sewa } = require('../../main.js');
 const ms = require('parse-ms');
 
 module.exports = {

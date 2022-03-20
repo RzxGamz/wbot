@@ -1,5 +1,6 @@
 const { owner } = require('../../config.json');
-const { sewa, db_sewa } = require('../../main.js');
+const sewa = require('../../lib/sewa.js');
+const db_sewa = []
 
 module.exports = {
     name: 'sewa',
@@ -17,7 +18,6 @@ module.exports = {
         wa.reply(from, `Success`, msg)
         } else if (args[0].toLowerCase() === 'del'){
         db_sewa.splice(sewa.getSewaPosition(from, db_sewa), 1)
-        fs.writeFileSync('././databases/sewa.json', JSON.stringify(db_sewa))
         wa.reply(from, `Success`, msg)
         } else {
         wa.reply(from, `Example :\n*#sewa* add/del waktu`, msg)

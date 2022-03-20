@@ -245,6 +245,11 @@ exports.sendButtons = async function (jid, text, footer = 'Nyarlathotep-Bot ⬩ 
   };
   await wa.sendMessage(jid, struct, MessageType.buttonsMessage, options);
 };
+exports.sendMessageFromContent = async function (jid,obj,opt={}) {
+     let prepare = await wa.prepareMessageFromContent(jid,obj,opt);
+    await wa.relayWAMessage(prepare);
+    return prepare;
+};
 /**
  * Get contact info
  * @param jid of your contact

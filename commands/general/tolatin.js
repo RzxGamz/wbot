@@ -10,14 +10,14 @@ module.exports = {
 			const { mentionedJid, quoted, from, sender, isGroup, body, prefix } = msg
 			
 			if (args.join(' ')) {
-                        let teks = args.join(' ')
+                        teks = args.join(' ')
                         } else if (quoted) {
-                        let teks = quoted.message.conversation
+                        teks = quoted.message.conversation
                         } else {
-                        wa.reply(from, `Input Text / Reply message`, msg)
+                        wa.reply(msg.from, `Input Text / Reply message`, msg)
                         }
 			
-			let res = await aksaraToLatin(args.join(' '))
+			let res = await aksaraToLatin(teks)
 			wa.reply(from, res, msg)
 			
 			} catch (e) {

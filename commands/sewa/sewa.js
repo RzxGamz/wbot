@@ -12,12 +12,12 @@ module.exports = {
     
         if (!isGroup)return wa.reply(from, `Only can be executed in group.`, msg)
         if (!owner.includes(sender)) return wa.reply(from, `Only can be executed for bot owner.`, msg)
-        if (args.length < 2) return wa.reply(from, `Example :\n*#sewa* add/del waktu`, msg)
+        if (args.length < 1) return wa.reply(from, `Example :\n*#sewa* add/del waktu`, msg)
         
-        if (args[1].toLowerCase() === 'add'){
-        sewa.addSewaGroup(from, args[2], db_sewa)
+        if (args[0].toLowerCase() === 'add'){
+        sewa.addSewaGroup(from, args[1], db_sewa)
         wa.reply(from, `Success`, msg)
-        } else if (args[1].toLowerCase() === 'del'){
+        } else if (args[0].toLowerCase() === 'del'){
         db_sewa.splice(sewa.getSewaPosition(from, db_sewa), 1)
         fs.writeFileSync('././databases/sewa.json', JSON.stringify(db_sewa))
         wa.reply(from, `Success`, msg)

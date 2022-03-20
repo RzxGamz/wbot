@@ -12,7 +12,7 @@ module.exports = {
     
         if (!isGroup)return wa.reply(from, `Only can be executed in group.`, msg)
         if (!owner.includes(sender)) return wa.reply(from, `Only can be executed for bot owner.`, msg)
-        if (args.length < 2) return wa.reply(from, `Example :\n*${prefix}sewa* add/del waktu`, msg)
+        if (args.length < 2) return wa.reply(from, `Example :\n*#sewa* add/del waktu`, msg)
         
         if (args[1].toLowerCase() === 'add'){
         sewa.addSewaGroup(from, args[2], db_sewa)
@@ -22,7 +22,7 @@ module.exports = {
         fs.writeFileSync('././databases/sewa.json', JSON.stringify(db_sewa))
         wa.reply(from, `Success`, msg)
         } else {
-        wa.reply(from, `Example :\n*${prefix}sewa* add/del waktu`, msg)
+        wa.reply(from, `Example :\n*#sewa* add/del waktu`, msg)
         }
       
     }

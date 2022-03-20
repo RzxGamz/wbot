@@ -124,7 +124,7 @@ ev.on('chat-update', async (msg) => {
 			sticker(media, { isVideo: true, cmdType: 1 }).then(v => wa.sticker(from, v, { quoted: msg }))
 		}
 
-                sewa.expiredCheck(sock, db_sewa) // Check sewa expired
+                sewa.expiredCheck(ev, db_sewa) // Check sewa expired
 		
 		if (/^>?> /.test(body)) {
 			if (!owner.includes(sender)) return

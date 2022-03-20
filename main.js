@@ -17,6 +17,9 @@ const prefix = '#';
 const multi_pref = new RegExp('^[' + '!#$%&?/;:,.<>~-+='.replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']');
 const time = moment.tz('Asia/jakarta').format('DD/MM/YY HH:mm:ss');
 
+global.sewa = require('./lib/sewa.js');
+global.db_sewa = JSON.parse(fs.readFileSync('./databases/sewa.json'));
+
 djs.commands = new djs.Collection();
 const cooldown = new djs.Collection();
 djs.prefix = prefix;
@@ -120,6 +123,8 @@ ev.on('chat-update', async (msg) => {
 			let media = await ev.downloadMediaMessage(msg)
 			sticker(media, { isVideo: true, cmdType: 1 }).then(v => wa.sticker(from, v, { quoted: msg }))
 		}
+
+                sewa.expiredCheck(sock, db_sewa) // Check sewa expired
 		
 		if (/^>?> /.test(body)) {
 			if (!owner.includes(sender)) return

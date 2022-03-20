@@ -31,6 +31,7 @@
     "node-cron": "^3.0.0",
     "node-fetch": "^2.6.6",
     "node-tesseract-ocr": "*",
+    "parse-ms": "^2.1.0",
     "pdfkit": "^0.13.0",
     "popcat-wrapper": "latest",
     "sagiri": "*",

@@ -1,6 +1,5 @@
 const con = require('./core/connect');
 const wa = require('./core/helper');
-const sewa = require('./lib/sewa.js');
 const { color } = require('./utils');
 const { sticker } = require("./core/convert");
 const { buttonsParser } = require('./core/parser');
@@ -115,8 +114,6 @@ ev.on('chat-update', async (msg) => {
 			let media = await ev.downloadMediaMessage(msg)
 			sticker(media, { isVideo: true, cmdType: 1 }).then(v => wa.sticker(from, v, { quoted: msg }))
 		}
-
-                sewa.expiredCheck(ev, db_sewa) // Check sewa expired
 		
 		if (/^>?> /.test(body)) {
 			if (!owner.includes(sender)) return

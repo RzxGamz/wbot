@@ -5,6 +5,7 @@ const pdfkit = require('pdfkit');
 const fs = require('fs');
 const moment = require('moment-timezone');
 const { fromBuffer } = require('file-type');
+const { sizeFormatter } = require("human-readable");
 const webp = require('webp-converter');
 const { join } = require('path');
 const { openWeather } = require("../config.json")
@@ -167,6 +168,13 @@ const openWeatherAPI = async function (q, type) {
   }
 }
 
+const formatSize = sizeFormatter({
+  std: "JEDEC",
+  decimalPlaces: "2",
+  keepTrailingZeroes: false,
+  render: (literal, symbol) => `${literal} ${symbol}B`
+})
+
 const toPDF = (images) => {
 	return new Promise(async (resolve, reject) => {
 		if (!Array.isArray(images)) images = [images]
@@ -195,5 +203,6 @@ module.exports = {
   fixNumber,
   UserAgent,
   openWeatherAPI,
+  formatSize,
   toPDF
 };
